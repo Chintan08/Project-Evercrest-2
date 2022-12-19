@@ -3,7 +3,10 @@ import curses
 from curses import *
 from Engine.print_queue import print_queue
 from Windows.opening_window import opening_window
+from constants import constants
+from os import system
 
+system("Project: Evercrest 2")
 kernel32 = ctypes.WinDLL('kernel32')
 user32 = ctypes.WinDLL('user32')
 hWnd = kernel32.GetConsoleWindow()
@@ -35,10 +38,17 @@ font.FaceName = "Lucida Console"
 handle = ctypes.windll.kernel32.GetStdHandle(STD_OUTPUT_HANDLE)
 ctypes.windll.kernel32.SetCurrentConsoleFontEx(handle, ctypes.c_long(False), ctypes.pointer(font))
 
-
 def main(stdscr):
 
-    curses.start_color()
+    curses.curs_set(False)
+    constants.TERMINAL_Y = stdscr.getmaxyx()[0]
+    constants.TERMINAL_X = stdscr.getmaxyx()[1]
+
+    curses.init_pair(1, curses.COLOR_YELLOW, curses.COLOR_BLACK)
+    curses.init_pair(2, curses.COLOR_RED, curses.COLOR_BLACK)
+    constants.YELLOW = curses.color_pair(1)
+    constants.RED = curses.color_pair(2)
+
     print_queue.add_event(opening_window)
     print_queue.start(stdscr)
 

@@ -3,6 +3,11 @@
 class print_queue:
 
     queue = []
+    old_screen = []
+    screen_index = 0
+
+    # If true, Escape can lead to a menu. Windows set this. Input handlers set action to this.
+    FLAG_ESCAPE = True
 
     @staticmethod
     def start(screen):
@@ -18,9 +23,12 @@ class print_queue:
 
             if len(print_queue.queue) is not 0:
                 print_event = print_queue.queue[len(print_queue.queue)-1]
+                print_queue.old_screen.append(print_event)
+                print_queue.screen_index = len(print_queue.old_screen)-1
                 del print_queue.queue[len(print_queue.queue)-1]
                 screen.clear()
 
+            screen.refresh()
             print_event.start(screen)
             print_event.getin(screen)
             screen.refresh()
@@ -40,3 +48,7 @@ class print_queue:
 
                 else:
                     print_queue.queue[i+1] = i
+
+    @staticmethod
+    def add_previous():
+        print_queue.add_event(print_queue.old_screen[print_queue.screen_index-1])

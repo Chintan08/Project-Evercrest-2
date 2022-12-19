@@ -12,8 +12,23 @@ class input_framework:
             input = screen.getch()
 
             # ESCAPE LISTENER #
-            if input is 27:
+            if input is 27 and print_queue.FLAG_ESCAPE:
                 print_queue.add_event(esc_menu)
+                break
 
             if input in range(49, 49+list_size):
                 return input-48
+
+    @staticmethod
+    def get_key(screen):
+
+        while True:
+
+            input = screen.getch()
+
+            if input == 27 and print_queue.FLAG_ESCAPE:
+                print_queue.add_event(esc_menu)
+                break
+
+            else:
+                break

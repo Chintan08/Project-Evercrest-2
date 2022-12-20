@@ -8,30 +8,34 @@ from constants import constants
 
 class dialogue_slate:
 
-    win = ""
     strlist = []
 
-    @staticmethod
-    def start(screen):
+    def __init__(self):
+        self.strlist = []
+
+    def start(self, screen):
 
         print_queue.FLAG_ESCAPE = False
 
         y = 0
-        for string in dialogue_slate.strlist:
+        for string in self.strlist:
             dialogue.dia(screen, y, 0, string)
             y += 2
-            dialogue_slate.getenter(screen)
+            self.getenter(screen)
+            if y >= 15:
+                screen.clear()
 
-    @staticmethod
-    def getenter(screen):
+    def getenter(self, screen):
 
         screen.addstr(constants.TERMINAL_Y-1, int(screen.getmaxyx()[1]/2) - 10, "Press any key to continue")
         input_framework.get_key(screen)
 
+    # Important Note:
+    # Screens that need to handle inputs in-house to continue building do NOT use getin()
+    # Instead, they should do it themselves. The Print Queue is the only thing that uses getin().
     @staticmethod
     def getin(screen):
         pass
 
-    @staticmethod
-    def add(string):
-        dialogue_slate.strlist.append(string)
+    def add(self, string):
+        self.strlist.append(string)

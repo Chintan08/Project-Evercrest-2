@@ -7,4 +7,5 @@ class constants:
 
     YELLOW = ""
     RED = ""
+    WHITE = ""
 

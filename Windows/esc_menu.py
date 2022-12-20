@@ -6,7 +6,7 @@ from constants import constants
 
 class esc_menu:
 
-    win = ""
+    win = None
 
     @staticmethod
     def start(screen):

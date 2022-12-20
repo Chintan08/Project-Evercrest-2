@@ -22,12 +22,14 @@ class print_queue:
         while True:
 
             if len(print_queue.queue) is not 0:
-                print_event = print_queue.queue[len(print_queue.queue)-1]
+                print_event = print_queue.queue[0]
                 print_queue.old_screen.append(print_event)
                 print_queue.screen_index = len(print_queue.old_screen)-1
-                del print_queue.queue[len(print_queue.queue)-1]
+                del print_queue.queue[0]
+                print_queue.rebuild()
                 screen.clear()
 
+            screen.addstr(30, 30, f"{print_queue.old_screen}")
             screen.refresh()
             print_event.start(screen)
             print_event.getin(screen)
@@ -35,20 +37,18 @@ class print_queue:
 
     @staticmethod
     def add_event(event):
-
-        if len(print_queue.queue) == 0:
-            print_queue.queue.append(event)
-
-        else:
-
-            for i in range(len(print_queue.queue))[::-1]:
-                if i is 0:
-                    print_queue.queue[i] = event
-                    break
-
-                else:
-                    print_queue.queue[i+1] = i
+        print_queue.queue.append(event)
 
     @staticmethod
     def add_previous():
-        print_queue.add_event(print_queue.old_screen[print_queue.screen_index-1])
+        print_queue.add_event(print_queue.old_screen[len(print_queue.old_screen)-2])
+
+    @staticmethod
+    def rebuild():
+
+        temporary = []
+        for item in print_queue.queue:
+            if item is not None:
+                temporary.append(item)
+
+        print_queue.queue = temporary

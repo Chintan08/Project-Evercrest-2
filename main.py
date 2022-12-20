@@ -46,8 +46,10 @@ def main(stdscr):
 
     curses.init_pair(1, curses.COLOR_YELLOW, curses.COLOR_BLACK)
     curses.init_pair(2, curses.COLOR_RED, curses.COLOR_BLACK)
+    curses.init_pair(3, curses.COLOR_WHITE, curses.COLOR_BLACK)
     constants.YELLOW = curses.color_pair(1)
     constants.RED = curses.color_pair(2)
+    constants.WHITE = curses.color_pair(3)
 
     print_queue.add_event(opening_window)
     print_queue.start(stdscr)

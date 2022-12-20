@@ -3,6 +3,8 @@ from time import sleep
 
 class dialogue:
 
+    # TODO: color handling
+
     @staticmethod
     def dia(screen, y, x, content):
 
@@ -26,7 +28,8 @@ class dialogue:
             x += BEGIN
 
         for character in range(BEGIN, len(content)):
-            sleep(0.03)
+
             screen.addstr(y, x, content[character])
+            sleep(0.03)
             screen.refresh()
             x += 1

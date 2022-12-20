@@ -11,7 +11,7 @@ class opening_window:
     @staticmethod
     def start(screen):
 
-        print_queue.FLAG_ESCAPE = False
+        print_queue.FLAG_ESCAPE = True
 
         screen.addstr(11, 87, "Welcome to the world of...")
         screen.addstr(13, 59, f"=================================================================================", constants.YELLOW | curses.A_BOLD)

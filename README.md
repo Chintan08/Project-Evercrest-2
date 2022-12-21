@@ -2,6 +2,7 @@
 
 Project Evercrest 2 (working title) is an ambitious terminal-based RPG.
 The game has (rather, will have):
+  
   Impactful decision making
   D&D-esque Character Attributes that factor into how the world treats you
   Custom, unique and high skill ceiling turn-based combat system

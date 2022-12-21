@@ -1,9 +1,7 @@
-import curses
-
 from Engine.input_framework import input_framework
 from Engine.print_queue import print_queue
 from Engine.dialogue import dialogue
-from constants import constants
+from Engine.constants import constants
 
 
 class dialogue_slate:

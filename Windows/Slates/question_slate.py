@@ -17,7 +17,7 @@ class question_slate:
 
     def start(self, screen):
 
-        print_queue.FLAG_ESCAPE = True
+        print_queue.FLAG_ESCAPE = False
 
         screen.addstr(0, 0, self.question)
         y = 2
@@ -29,15 +29,5 @@ class question_slate:
 
     def getin(self, screen):
 
-        self.set_last_input(input_framework.ask_number(screen, len(self.response)))
-        screen.addstr(10, 10, f"{self.last_input}")
-        screen.refresh()
-        sleep(1)
-
-    def set_last_input(self, input):
-        self.last_input = input
-
-    def get_last_input(self):
-        return self.last_input
-
+        return input_framework.ask_number(screen, len(self.response))
 

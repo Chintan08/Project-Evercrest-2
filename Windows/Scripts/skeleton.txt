@@ -1,0 +1,35 @@
+from Engine.input_framework import input_framework
+from Engine.print_queue import print_queue
+from Windows.dialogue_slate import dialogue_slate
+from Windows.question_slate import question_slate
+from constants import constants
+
+# A Script is a class that uses Slates to build screens.
+# A Script can look like a quest, or an NPC giving dialogue.
+# A Script uses something called Phases to advance and store screens.
+# A Script can be an object, or it can be static. Take precautions accordingly.
+
+class [CLASS NAME]:
+
+    # Stores the phase of the script. Remember, these are like checkpoints.
+    phase = 0
+
+    # Flag Answer tells the print queue if the script has done its job. This should always be true, and set to false on its last phase.
+    FLAG_ANSWER = True
+
+    # The method print queue calls. This is where you build and push slates accordingly.
+    # A rule of thumb to follow:
+    # If you are pushing a slate, it should be in its own phase. The slate you push needs time to be shown.
+    @staticmethod
+    def run(screen):
+
+        # Phase Checkpoint
+        if [CLASS NAME].phase == 0:
+
+            # DO NOT FORGET TO INCREMENT OR DECREMENT ON PHASE ENDS
+            [CLASS NAME].phase += 1
+
+
+        # DO NOT FORGET TO SET THIS TO FALSE OR ELSE YOU WILL BE STUCK IN A LOOP, PUT THIS ON FINAL PHASE
+        [CLASS NAME].FLAG_ANSWER = False
+

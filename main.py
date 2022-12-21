@@ -3,7 +3,7 @@ import curses
 from curses import *
 from Engine.print_queue import print_queue
 from Windows.opening_window import opening_window
-from constants import constants
+from Engine.constants import constants
 from os import system
 
 system("Project: Evercrest 2")

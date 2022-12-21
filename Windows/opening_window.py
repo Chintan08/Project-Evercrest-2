@@ -2,8 +2,8 @@ import curses
 
 from Engine.input_framework import input_framework
 from Engine.print_queue import print_queue
-from Levels.creation import creation
-from constants import constants
+from Windows.Scripts.creation import creation
+from Engine.constants import constants
 
 
 class opening_window:
@@ -33,11 +33,16 @@ class opening_window:
 
     @staticmethod
     def getin(screen):
+
         input = input_framework.ask_number(screen, 3)
 
         if input == 1:
-            creation.start(screen)
+            print_queue.set_script(creation)
+            return input
+
         if input == 2:
             screen.addstr(40, 85, f"You do not have a game to load.", constants.RED)
+            return input
+
         if input == 3:
             exit(0)

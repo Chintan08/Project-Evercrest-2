@@ -1,7 +1,7 @@
 import curses
 
 from Engine.print_queue import print_queue
-from constants import constants
+from Engine.constants import constants
 
 
 class esc_menu:

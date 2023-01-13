@@ -33,6 +33,14 @@ class dialogue:
         for character in range(BEGIN, len(content)):
 
             screen.addstr(y, x, content[character])
-            sleep(0.03)
             screen.refresh()
+
+            if content[character] in [".", "!", "?", ";"] and character < len(content)-1:
+                sleep(0.4)
+            elif content[character] in [","] and character < len(content)-1:
+                sleep(0.05)
+            else:
+                sleep(0.03)
+
+
             x += 1

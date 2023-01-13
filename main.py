@@ -41,8 +41,11 @@ ctypes.windll.kernel32.SetCurrentConsoleFontEx(handle, ctypes.c_long(False), cty
 def main(stdscr):
 
     curses.curs_set(False)
+
     constants.TERMINAL_Y = stdscr.getmaxyx()[0]
     constants.TERMINAL_X = stdscr.getmaxyx()[1]
+    constants.CENTER_Y = int(constants.TERMINAL_Y / 2)
+    constants.CENTER_X = int(constants.TERMINAL_X / 2)
 
     curses.init_pair(1, curses.COLOR_YELLOW, curses.COLOR_BLACK)
     curses.init_pair(2, curses.COLOR_RED, curses.COLOR_BLACK)

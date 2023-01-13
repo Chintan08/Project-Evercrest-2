@@ -1,5 +1,6 @@
 from time import sleep
 
+from Engine.constants import constants
 from Engine.input_framework import input_framework
 from Engine.print_queue import print_queue
 
@@ -8,7 +9,6 @@ class question_slate:
 
     question = ""
     response = []
-    last_input = 0
 
     def __init__(self, question, response):
         self.question = question
@@ -20,12 +20,11 @@ class question_slate:
         print_queue.FLAG_ESCAPE = False
 
         screen.addstr(0, 0, self.question)
-        y = 2
+        screen.move(2, 0)
         for index in range(0, len(self.response)):
-            screen.addstr(y, 0, f"{index+1}. " + self.response[index])
-            y += 1
+            screen.addstr(f"{index+1}. " + self.response[index] + "\n")
 
-        screen.addstr(y + 2, 0, "What do you do?")
+        screen.addstr(constants.TERMINAL_Y-1, int(screen.getmaxyx()[1]/2) - 7, "What do you do?")
 
     def getin(self, screen):
 

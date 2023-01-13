@@ -27,6 +27,7 @@ class dialogue_slate:
 
         screen.addstr(constants.TERMINAL_Y-1, int(screen.getmaxyx()[1]/2) - 10, "Press any key to continue")
         input_framework.get_key(screen)
+        screen.addstr(constants.TERMINAL_Y-1, int(constants.TERMINAL_X/2) - 10, "                         ")
 
     # Important Note:
     # Screens that need to handle inputs in-house to continue building do NOT use getin()

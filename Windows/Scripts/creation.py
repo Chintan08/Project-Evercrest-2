@@ -1,4 +1,4 @@
-from Engine.print_queue import print_queue
+from Engine.game import game
 from Races.arc import arc
 from Races.galed import galed
 from Windows.Slates.dialogue_slate import dialogue_slate
@@ -20,7 +20,7 @@ class creation:
 
         if creation.phase == 0:
             slate = dialogue_slate()
-            print_queue.add_event(slate)
+            game.add_event(slate)
             slate.add(f"???: Hello everyone!")
             slate.add("???: Welcome to the Mercenary Bootcamp! I am Tracey, the lead of this bootcamp.")
             slate.add("Tracey: You all are here for an important reason; to become mercenaries of the great land of Evercrest!")
@@ -33,20 +33,20 @@ class creation:
 
         elif creation.phase == 1:
             name = open_slate("Question 1: What is your name?")
-            print_queue.add_event(name)
+            game.add_event(name)
             creation.phase += 1
 
         elif creation.phase == 2:
 
             race = question_slate("Question 2: What is your race?", [f"{arc.name}: \n{arc.creation_description}\n",
                                                                      f"{galed.name}: \n{galed.creation_description}\n"])
-            print_queue.add_event(race)
+            game.add_event(race)
 
             creation.phase += 1
 
         elif creation.phase == 3:
 
-            print_queue.add_event(world_skill_allocator)
+            game.add_event(world_skill_allocator)
             creation.phase += 1
 
         elif creation.phase == 4:

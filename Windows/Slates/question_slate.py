@@ -2,7 +2,7 @@ from time import sleep
 
 from Engine.constants import constants
 from Engine.input_framework import input_framework
-from Engine.print_queue import print_queue
+from Engine.game import game
 
 
 class question_slate:
@@ -17,7 +17,7 @@ class question_slate:
 
     def start(self, screen):
 
-        print_queue.FLAG_ESCAPE = False
+        game.FLAG_ESCAPE = False
 
         screen.addstr(0, 0, self.question)
         screen.move(2, 0)

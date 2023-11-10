@@ -1,10 +1,15 @@
 import ctypes
 import curses
 from curses import *
-from Engine.print_queue import print_queue
+from Engine.game import game
 from Windows.opening_window import opening_window
 from Engine.constants import constants
 from os import system
+
+# TODO
+# Resolution changes (1080p to 4k for example) are not handled in the game.
+# This problem comes from the font size. For 1080p, dwFontSize.Y should be 14. For 4k, it should be 16.
+# There needs to be a way to scale it.
 
 system("Project: Evercrest 2")
 kernel32 = ctypes.WinDLL('kernel32')
@@ -30,7 +35,7 @@ font = CONSOLE_FONT_INFOEX()
 font.cbSize = ctypes.sizeof(CONSOLE_FONT_INFOEX)
 font.nFont = 12
 font.dwFontSize.X = 11
-font.dwFontSize.Y = 16
+font.dwFontSize.Y = 14
 font.FontFamily = 54
 font.FontWeight = 400
 font.FaceName = "Lucida Console"
@@ -41,7 +46,6 @@ ctypes.windll.kernel32.SetCurrentConsoleFontEx(handle, ctypes.c_long(False), cty
 def main(stdscr):
 
     curses.curs_set(False)
-
     constants.TERMINAL_Y = stdscr.getmaxyx()[0]
     constants.TERMINAL_X = stdscr.getmaxyx()[1]
     constants.CENTER_Y = int(constants.TERMINAL_Y / 2)
@@ -54,8 +58,8 @@ def main(stdscr):
     constants.RED = curses.color_pair(2)
     constants.WHITE = curses.color_pair(3)
 
-    print_queue.add_event(opening_window)
-    print_queue.start(stdscr)
+    game.add_event(opening_window)
+    game.start(stdscr)
 
 
 wrapper(main)

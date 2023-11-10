@@ -1,5 +1,5 @@
 from Engine.input_framework import input_framework
-from Engine.print_queue import print_queue
+from Engine.game import game
 from Engine.dialogue import dialogue
 from Engine.constants import constants
 
@@ -13,7 +13,7 @@ class dialogue_slate:
 
     def start(self, screen):
 
-        print_queue.FLAG_ESCAPE = False
+        game.FLAG_ESCAPE = False
 
         y = 0
         for string in self.strlist:

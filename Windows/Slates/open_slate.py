@@ -2,7 +2,7 @@ import curses
 from time import sleep
 
 from Engine.input_framework import input_framework
-from Engine.print_queue import print_queue
+from Engine.game import game
 
 
 class open_slate:
@@ -14,7 +14,7 @@ class open_slate:
 
     def start(self, screen):
 
-        print_queue.FLAG_ESCAPE = False
+        game.FLAG_ESCAPE = False
 
         screen.addstr(0, 0, self.question)
 

@@ -1,6 +1,6 @@
 import curses
 
-from Engine.print_queue import print_queue
+from Engine.game import game
 from Engine.constants import constants
 
 
@@ -34,7 +34,7 @@ class esc_menu:
 
             if input in range(49, 52):
                 if input is 49:
-                    print_queue.add_previous()
+                    game.add_previous()
                     break
 
                 if input is 50:

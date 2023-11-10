@@ -1,10 +1,9 @@
 
 
-
-# The Print Queue is a game loop that draws screens onto the terminal and looks to gain inputs
+# Game is a game loop that draws screens onto the terminal and looks to gain inputs
 # Games usually do updates before drawing, but terminal games need to do this in reverse.
 # The Print Queue stores vital information including current scripts, last inputs, and a list of old screens that have passed through program run.
-class print_queue:
+class game:
 
     # The queue is a list of print events. The first event to go is located at the head.
     queue = []
@@ -35,7 +34,6 @@ class print_queue:
         # Clear terminal screen on launch
         screen.clear()
 
-
         # GAME LOOP #
         while True:
 
@@ -43,51 +41,51 @@ class print_queue:
             # We give the screen to old_screens, then delete the entry in the queue.
             # Because a gap is left in the queue, we ask to rebuild the queue to make sure it is not broken.
             # Clear the previous screen then continue operations.
-            if len(print_queue.queue) is not 0:
-                print_queue.print_event = print_queue.queue[0]
-                print_queue.old_screens.append(print_queue.print_event)
-                del print_queue.queue[0]
-                print_queue.rebuild()
+            if len(game.queue) is not 0:
+                game.print_event = game.queue[0]
+                game.old_screens.append(game.print_event)
+                del game.queue[0]
+                game.rebuild()
                 screen.clear()
 
             # All print events have a start method. Displays what the print event wants to.
-            print_queue.print_event.start(screen)
+            game.print_event.start(screen)
 
             screen.refresh()
 
             # Store the input returned from getin(). getin() HAS to return a value unless it is an exit.
-            print_queue.last_received_input = print_queue.print_event.getin(screen)
+            game.last_received_input = game.print_event.getin(screen)
 
             # Check if we can talk to current script.
-            if print_queue.current_script is not None and print_queue.current_script.FLAG_ANSWER and not print_queue.FLAG_COMBAT:
-                print_queue.current_script.run(screen)  # We let the current script change phases because it wants full control of it.
+            if game.current_script is not None and game.current_script.FLAG_ANSWER and not game.FLAG_COMBAT:
+                game.current_script.run(screen)  # We let the current script change phases because it wants full control of it.
 
             # Check if current script needs to be removed.
-            if print_queue.current_script is not None and print_queue.current_script.FLAG_ANSWER is False:
-                print_queue.current_script = None
+            if game.current_script is not None and game.current_script.FLAG_ANSWER is False:
+                game.current_script = None
 
             screen.refresh()
 
     # Adds a print event to the queue.
     @staticmethod
     def add_event(event):
-        print_queue.queue.append(event)
+        game.queue.append(event)
 
     # Adds a previous screen to the queue.
     # Can lead to an index out of bounds error, but should not be possible as a minimum of 2 screens had to have existed before this is ever called.
     @staticmethod
     def add_previous():
-        print_queue.add_event(print_queue.old_screens[len(print_queue.old_screens) - 2])
+        game.add_event(game.old_screens[len(game.old_screens) - 2])
 
     # Sets the current script. Called from static screens like opening_screen or a location screen.
     @staticmethod
     def set_script(script):
-        print_queue.current_script = script
+        game.current_script = script
 
     # Returns previous input.
     @staticmethod
     def get_last_input():
-        return print_queue.last_received_input
+        return game.last_received_input
 
     # Rebuilds the queue by building a new queue and swapping them.
     # Rebuilds, as of 12/20/2022, have no real purpose. Because the queue only ever expects 1 entry, there is never a hole.
@@ -95,8 +93,8 @@ class print_queue:
     def rebuild():
 
         temporary = []
-        for item in print_queue.queue:
+        for item in game.queue:
             if item is not None:
                 temporary.append(item)
 
-        print_queue.queue = temporary
+        game.queue = temporary

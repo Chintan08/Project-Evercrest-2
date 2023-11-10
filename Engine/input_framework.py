@@ -1,4 +1,4 @@
-from Engine.print_queue import print_queue
+from Engine.game import game
 from Windows.esc_menu import esc_menu
 
 
@@ -15,8 +15,8 @@ class input_framework:
 
             input = screen.getch()
 
-            if input is 27 and print_queue.FLAG_ESCAPE:
-                print_queue.add_event(esc_menu)
+            if input is 27 and game.FLAG_ESCAPE:
+                game.add_event(esc_menu)
                 break
 
             if input in range(49, 49+list_size):
@@ -32,8 +32,8 @@ class input_framework:
 
             input = screen.getch()
 
-            if input == 27 and print_queue.FLAG_ESCAPE:
-                print_queue.add_event(esc_menu)
+            if input == 27 and game.FLAG_ESCAPE:
+                game.add_event(esc_menu)
                 break
 
             else:

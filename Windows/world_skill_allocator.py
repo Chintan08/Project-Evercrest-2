@@ -2,7 +2,7 @@ import curses
 
 from Engine.constants import constants
 from Engine.input_framework import input_framework
-from Engine.print_queue import print_queue
+from Engine.game import game
 
 
 class world_skill_allocator:
@@ -13,7 +13,7 @@ class world_skill_allocator:
     @staticmethod
     def start(screen):
 
-        print_queue.FLAG_ESCAPE = False
+        game.FLAG_ESCAPE = False
 
         screen.addstr(3, int(constants.TERMINAL_X/2) - 34, "Question 3: Allocate 10 points into these 6 characteristics to define yourself.")
 
